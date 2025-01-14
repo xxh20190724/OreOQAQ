@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="zh_CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Vim学习手册  | OreOQAQ</title><meta name="author" content="OreOQAQ"><meta name="copyright" content="OreOQAQ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="需求为导向的笔记.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim学习手册 ">
+<meta property="og:url" content="https://xxh20190724.github.io/OreOQAQ/2025/01/14/vim%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="OreOQAQ">
+<meta property="og:description" content="需求为导向的笔记.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xxh20190724.github.io/OreOQAQ/images/avatar.jpg">
+<meta property="article:published_time" content="2025-01-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-14T00:00:00.000Z">
+<meta property="article:author" content="OreOQAQ">
+<meta property="article:tag" content="vim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xxh20190724.github.io/OreOQAQ/images/avatar.jpg"><link rel="shortcut icon" href="/OreOQAQ/img/favicon.png"><link rel="canonical" href="https://xxh20190724.github.io/OreOQAQ/2025/01/14/vim%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/OreOQAQ/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/OreOQAQ/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: {"chs_to_cht":"You have switched to Traditional Chinese","cht_to_chs":"You have switched to Simplified Chinese","day_to_night":"You have switched to Dark Mode","night_to_day":"You have switched to Light Mode","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vim学习手册 ',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/OreOQAQ/./images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/OreOQAQ/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/OreOQAQ/tags/"><div class="headline">Tags</div><div class="length-num">3</div></a><a href="/OreOQAQ/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/OreOQAQ/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/OreOQAQ/"><span class="site-name">OreOQAQ</span></a><a class="nav-page-title" href="/OreOQAQ/"><span class="site-name">Vim学习手册 </span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/OreOQAQ/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/OreOQAQ/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Vim学习手册 </h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-01-14T00:00:00.000Z" title="Created 2025-01-14 08:00:00">2025-01-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-01-14T00:00:00.000Z" title="Updated 2025-01-14 08:00:00">2025-01-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/OreOQAQ/categories/%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">使用笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout hide-aside" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h1><p><a target="_blank" rel="noopener" href="https://yianwillis.github.io/vimcdoc/doc/usr_toc.html">Vim帮助文档</a></p>
+<h2 id="vim文件管理"><a href="#vim文件管理" class="headerlink" title="vim文件管理"></a>vim文件管理</h2><ol>
+<li><p>分割窗口：显示两个文件或一个文件不同地方，比较两个文件；</p>
+<ul>
+<li>分割        :split       新文件    :new</li>
+<li>跳转        ：&lt;c-w&gt; w</li>
+<li>窗口移动    ：&lt;c-w&gt; HJKL</li>
+<li>关闭        :close </li>
+<li>保留一个    ：only</li>
+</ul>
+</li>
+<li><p>窗口大小</p>
+<ul>
+<li>指定3行的窗口      :3split 文件 </li>
+<li>扩大窗口3行    ：3&lt;c-w&gt; +</li>
+<li>缩小窗口3行    ：3&lt;c-w&gt; -</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>垂直分割	:vsplit :vnew</li>
+<li>跳转 &lt;c-w&gt; hjkl&#x2F;tb</li>
+<li>批量打开窗口<br>vim -o file1 file2 file3<br>批量存关文件	:wqall</li>
+</ul>
+<ol start="3">
+<li>diff<br>1. 命令行中 vimdiff file1~file2<br>2. :edit file.txt<blockquote>
+<p>:vertical diffsplit file2.txt<br>3. :edit file.txt<br>:vertical diffpatch file.txt   补丁不会用<br>4. set noscrollbind 同步滚动<br>5. 差异跳转<br>]c   [c 支持记数<br>6. 差异编辑 用于增加几行拷到其他 文件中<br>   本文     do     “obtain<br>   其他    dp    “put</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="vim-快捷键"><a href="#vim-快捷键" class="headerlink" title="vim 快捷键"></a>vim 快捷键</h2><h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><ul>
+<li>到一个指定的字符x find  <ul>
+<li>xfx  Fx</li>
+<li>tx  Tx</li>
+</ul>
+</li>
+<li>括号跳转 % 配合位置查看 c-G</li>
+<li>直接使用 百分数字30%也能 跳转 </li>
+<li>整个文件跳转 H M L</li>
+<li>滚屏 <ul>
+<li>半屏 &lt;c-u&gt; &lt;c-d&gt;</li>
+<li>一行 &lt;c-e&gt; c-Y</li>
+<li>c-F c-B</li>
+<li>zz  光标居中  zt zb</li>
+</ul>
+</li>
+</ul>
+<h3 id="查找替换"><a href="#查找替换" class="headerlink" title="查找替换"></a>查找替换</h3><ol>
+<li>查找<ul>
+<li>:&#x2F;</li>
+<li>:?</li>
+<li>n&#x2F;N下一个，上一个</li>
+<li>：nohls  取消高亮</li>
+</ul>
+</li>
+<li>替换范围40~50行<ul>
+<li>40,50s&#x2F;{查找的}&#x2F;{替换}&#x2F;参数 g(本行全部) c(选择替换) n(统计)</li>
+<li>.* 代替任何字符</li>
+<li>‘&#x2F;0’替代完整的匹配 ，加括号。</li>
+</ul>
+</li>
+<li>查找光标下的单词 *  # </li>
+<li>部分匹配 &#x2F;&lt; &gt; :g* :g#</li>
+<li>忽略大小写 取消高亮</li>
+</ol>
+<h3 id="补全"><a href="#补全" class="headerlink" title="补全"></a>补全</h3><ul>
+<li>&lt;c-n&gt;</li>
+<li>&lt;c-p&gt;</li>
+</ul>
+<h2 id="多件编-辑"><a href="#多件编-辑" class="headerlink" title="多件编 辑"></a>多件编 辑</h2><h2 id="vim一般功能"><a href="#vim一般功能" class="headerlink" title="vim一般功能"></a>vim一般功能</h2><h2 id="vim-多光标快捷键"><a href="#vim-多光标快捷键" class="headerlink" title="vim 多光标快捷键"></a>vim 多光标快捷键</h2><h2 id="vim本地化工作流"><a href="#vim本地化工作流" class="headerlink" title="vim本地化工作流"></a>vim本地化工作流</h2><h2 id="vim-git-方案"><a href="#vim-git-方案" class="headerlink" title="vim git 方案"></a>vim git 方案</h2><h1 id="vim技巧"><a href="#vim技巧" class="headerlink" title="vim技巧"></a>vim技巧</h1><h2 id="在一个窗口中，VIM-的小tab标签页命令："><a href="#在一个窗口中，VIM-的小tab标签页命令：" class="headerlink" title="在一个窗口中，VIM 的小tab标签页命令："></a>在一个窗口中，VIM 的小tab标签页命令：</h2><ul>
+<li>:tabnew [++opt选项] ［＋cmd］ 文件            建立对指定文件新的tab</li>
+<li>:tabc       关闭当前的tab</li>
+<li>:tabo       关闭所有其他的tab</li>
+<li>:tabs       查看所有打开的tab</li>
+<li>:tabp      前一个</li>
+<li>:tabn      后一个</li>
+</ul>
+<h2 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h2><ul>
+<li>:vsplit 这个命令太长，没人用的。大家都用 :vsp ，:sp filename来分屏。</li>
+<li>分屏的相关动作都是ctrl+w 开始的，然后再跟一个其他字母</li>
+<li>ctrl+w &#x3D; ：让左右上下各个分屏宽度，高度均等。</li>
+<li>ctrl+w _(shift + -) :当前屏幕高度扩展到最大</li>
+<li>ctrl+w |(shift + ) :当前屏幕宽度扩展到最大</li>
+<li>ctrl+w c：关闭当前屏幕</li>
+</ul>
+<h2 id="竖向编辑"><a href="#竖向编辑" class="headerlink" title="竖向编辑"></a>竖向编辑</h2><ul>
+<li>Ctrl+Shift+v</li>
+<li>I输入 esc</li>
+</ul>
+<h2 id="括号内容编辑"><a href="#括号内容编辑" class="headerlink" title="括号内容编辑"></a>括号内容编辑</h2><ul>
+<li><code>di(</code>删除括号()内容</li>
+<li><code>da(</code>删除括号和内容</li>
+</ul>
+<h2 id="自动对齐"><a href="#自动对齐" class="headerlink" title="自动对齐"></a>自动对齐</h2><ul>
+<li>选中后<code>=</code></li>
+</ul>
+<h2 id="vim-递增数列生成"><a href="#vim-递增数列生成" class="headerlink" title="vim 递增数列生成"></a>vim 递增数列生成</h2><ul>
+<li>Ctrl -Shift+a  或g+ …</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://xxh20190724.github.io/OreOQAQ">OreOQAQ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://xxh20190724.github.io/OreOQAQ/2025/01/14/vim%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://xxh20190724.github.io/OreOQAQ/2025/01/14/vim%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/OreOQAQ/tags/vim/">vim</a></div><div class="post-share"><div class="social-share" data-image="/OreOQAQ/./images/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/OreOQAQ/2025/01/14/git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/" title="Git学习手册 "><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Git学习手册 </div></div><div class="info-2"><div class="info-item-1">需求为导向的笔记.</div></div></div></a></nav></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By OreOQAQ</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/OreOQAQ/js/utils.js"></script><script src="/OreOQAQ/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
